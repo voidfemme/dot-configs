@@ -1,0 +1,37 @@
+#! /bin/sh
+
+sxhkd -c ~/.config/sxhkd/sxhkdrc &
+
+bspc monitor HDMI-2 -d 1 2 3 4 5 6 7 8 9 X
+bspc monitor eDP-1 -d 1 2 3 4 5 6 7 8 9 X
+
+bspc config focused_border_width        1
+bspc config window_gap          	5
+bspc config split_ratio         	0.5
+bspc config borderless_monocle  	true
+bspc config gapless_monocle     	true
+bspc config single_monocle 		true
+
+#: border colors :#
+#bspc config normal_border_color \#5bcefa
+#bspc config active_border_color \#00ff00
+bspc config focused_border_color \#76715e
+
+bspc config presel_feedback_color \#272822
+
+# pointer config:
+
+bspc config pointer_modifier mod1
+bspc config pointer_action1 resize_side
+bspc config pointer_action1 resize_corner
+bspc config pointer_action3 move
+bspc config focus_follows_pointer true
+# bspc config pointer_follows_focus true
+
+bspc config external_rules_command ~/.config/bspwm/applicationrules.sh
+~/.config/bspwm/./launch_polybar.sh
+picom -b &
+NUM_DESKTOPS=$( bspc query -D --names | tail -1 )
+# stalonetray --config .config/stalonetrayrc &
+# if wallpaper breaks, uncomment the rest of the next line
+exec /home/rsp/./.fehbg # --no-fehbg --bg-fill '/home/rsp/Pictures/NERV_evangelion.jpg'
